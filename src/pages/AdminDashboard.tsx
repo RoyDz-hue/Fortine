@@ -1,82 +1,41 @@
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import { useAuth } from "@/context/AuthContext";
-import AdminLayout from "@/components/admin/AdminLayout";
-import { lazy, Suspense, useEffect } from "react";
+// Placeholder for Admin Dashboard sub-pages, adjust imports as needed
+const AdminHome = () => <div>Admin Dashboard Home (Placeholder)</div>;
+const UsersPage = () => <div>Users Management Page (Placeholder)</div>;
+const CoinsPage = () => <div>Coins Management Page (Placeholder)</div>;
+const TradingPairsPage = () => <div>Trading Pairs Management Page (Placeholder)</div>;
+const AdminSettingsPage = () => <div>Admin Settings Page (Placeholder)</div>;
+const WithdrawalsPage = () => <div>Withdrawals Management Page (Placeholder)</div>;
+const AdminTransactionsPage = () => <div>Admin Transactions Page (Placeholder)</div>;
+const DepositsPage = () => <div>Deposits Management Page (Placeholder)</div>;
+const AdminReferralsPage = () => <div>Admin Referrals Page (Placeholder)</div>;
+const MarketPage = () => <div>Market Page (Placeholder)</div>; // Also used here
 
-// Lazy load pages for better performance
-const AdminHome = lazy(() => import("./admin/AdminHome"));
-const UsersPage = lazy(() => import("./admin/UsersPage"));
-const CoinsPage = lazy(() => import("./admin/CoinsPage"));
-const DepositsPage = lazy(() => import("./admin/DepositsPage"));
-const WithdrawalsPage = lazy(() => import("./WithdrawalsPage"));
-const TradingPairsPage = lazy(() => import("./admin/TradingPairsPage"));
-const SettingsPage = lazy(() => import("./admin/SettingsPage"));
-const TransactionsPage = lazy(() => import("./admin/TransactionsPage"));
-const MarketPage = lazy(() => import("./MarketPage"));
-const ReferralsPage = lazy(() => import("./admin/ReferralsPage"));
-
-// Loading fallback
-const PageLoader = () => (
-  <div className="flex items-center justify-center h-[60vh]">
-    <div className="text-center">
-      <div className="w-12 h-12 border-4 border-t-fortunesly-primary border-gray-200 rounded-full animate-spin mx-auto"></div>
-      <p className="mt-4 text-gray-600">Loading...</p>
-    </div>
-  </div>
-);
-
-// Main Admin Dashboard Component with Routes
-const AdminDashboard = () => {
-  const { isAuthenticated, isAdmin, user } = useAuth();
-  const navigate = useNavigate();
-  
-  useEffect(() => {
-    console.log("AdminDashboard mount - Auth status:", { isAuthenticated, isAdmin, user });
-    
-    if (!isAuthenticated) {
-      console.log("Not authenticated, redirecting to login");
-      navigate("/login");
-      return;
-    }
-    
-    if (!isAdmin) {
-      console.log("Non-admin user detected, redirecting to regular dashboard");
-      navigate("/dashboard");
-      return;
-    }
-
-    console.log("Admin user authenticated, staying on admin dashboard");
-  }, [isAuthenticated, isAdmin, user, navigate]);
-  
-  // Show loader while authentication is being checked
-  if (!isAuthenticated) {
-    return <PageLoader />;
-  }
-  
-  // Additional check to ensure only admin users can access this page
-  if (!isAdmin) {
-    return <PageLoader />;
-  }
-  
+const AdminDashboard: React.FC = () => {
   return (
-    <AdminLayout>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<AdminHome />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/coins" element={<CoinsPage />} />
-          <Route path="/deposits" element={<DepositsPage />} />
-          <Route path="/withdrawals" element={<WithdrawalsPage />} />
-          <Route path="/transactions" element={<TransactionsPage />} />
-          <Route path="/trading-pairs" element={<TradingPairsPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/referrals" element={<ReferralsPage />} />
-          <Route path="/market" element={<MarketPage />} />
-        </Routes>
-      </Suspense>
-    </AdminLayout>
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>This is a placeholder for the main admin dashboard area.</p>
+      {/* Nested routes for admin dashboard sections will go here */}
+      <Routes>
+        <Route index element={<AdminHome />} />
+        <Route path="home" element={<AdminHome />} />
+        <Route path="users" element={<UsersPage />} />
+        <Route path="coins" element={<CoinsPage />} />
+        <Route path="trading-pairs" element={<TradingPairsPage />} />
+        <Route path="settings" element={<AdminSettingsPage />} />
+        <Route path="withdrawals" element={<WithdrawalsPage />} />
+        <Route path="transactions" element={<AdminTransactionsPage />} />
+        <Route path="deposits" element={<DepositsPage />} />
+        <Route path="referrals" element={<AdminReferralsPage />} />
+        <Route path="market" element={<MarketPage />} />
+        {/* Add other admin dashboard routes here */}
+      </Routes>
+    </div>
   );
 };
 
 export default AdminDashboard;
+
