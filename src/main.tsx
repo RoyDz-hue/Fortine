@@ -1,26 +1,28 @@
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx"; // Minimal "Hello World" App
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.tsx";
 import "./index.css";
+import ErrorBoundary from "./components/ErrorBoundary";
 
-console.log("[main.tsx] Script started. Attempting to render minimal App.");
+console.log("[main.tsx] Script started. Attempting to render FULL App structure (without AuthProvider initially).");
 
 try {
   const rootElement = document.getElementById("root");
   if (rootElement) {
-    console.log("[main.tsx] Root element found. Calling createRoot().render().");
+    console.log("[main.tsx] Root element found. Calling createRoot().render() with BrowserRouter and App.");
     createRoot(rootElement).render(
-        <App />
+      <ErrorBoundary>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ErrorBoundary>
     );
-    console.log("[main.tsx] createRoot().render() called successfully.");
+    console.log("[main.tsx] createRoot().render() called successfully for full app structure.");
   } else {
     console.error("[main.tsx] CRITICAL: Root element #root not found in DOM.");
-    const newRoot = document.createElement('div');
-    newRoot.id = 'root';
-    document.body.appendChild(newRoot);
-    console.log("[main.tsx] Created and appended #root. This indicates an issue with original index.html or its loading.");
   }
 } catch (error) {
-  console.error("[main.tsx] CRITICAL: Error during React rendering:", error);
+  console.error("[main.tsx] CRITICAL: Error during React rendering of full app structure:", error);
   const errorDiv = document.createElement("div");
   errorDiv.style.color = "red";
   errorDiv.style.padding = "20px";
@@ -30,7 +32,7 @@ try {
   errorDiv.style.top = "10px";
   errorDiv.style.left = "10px";
   errorDiv.style.zIndex = "9999";
-  errorDiv.textContent = "Error in main.tsx: " + (error instanceof Error ? error.message : String(error)) + (error instanceof Error && error.stack ? " STACK: " + error.stack : "");
+  errorDiv.textContent = "Error in main.tsx (full app structure): " + (error instanceof Error ? error.message : String(error)) + (error instanceof Error && error.stack ? " STACK: " + error.stack : "");
   document.body.prepend(errorDiv);
 }
 
