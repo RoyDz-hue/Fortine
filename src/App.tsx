@@ -17,10 +17,13 @@ const ResetPasswordPage = lazy(() => import("@/pages/auth/ResetPasswordPage"));
 const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
+const MarketPage = lazy(() => import("@/pages/MarketPage")); // Added
+const TradePage = lazy(() => import("@/pages/TradePage"));   // Added
+const OrdersPage = lazy(() => import("@/pages/OrdersPage")); // Added
 
 // Fallback component for Suspense
 const PageLoader: React.FC = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px' }}>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px' }} className="text-white">
     Loading page...
   </div>
 );
@@ -70,6 +73,9 @@ function App() {
         <Route path="/" element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
           <Route index element={<HomePage />} />
           <Route path="dashboard/*" element={<Dashboard />} />
+          <Route path="market" element={<MarketPage />} /> {/* Added */}
+          <Route path="trade" element={<TradePage />} />   {/* Added */}
+          <Route path="orders" element={<OrdersPage />} /> {/* Added */}
           {/* Add other app-specific routes here */}
         </Route>
 
