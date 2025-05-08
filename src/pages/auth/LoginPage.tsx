@@ -2,8 +2,8 @@ import React from 'react';
 
 const LoginPage: React.FC = () => {
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="p-4 text-white">
+      <h1 className="text-2xl font-bold mb-2">Login Page</h1>
       <p>This is a placeholder page for login.</p>
       {/* Add login form components here */}
     </div>
