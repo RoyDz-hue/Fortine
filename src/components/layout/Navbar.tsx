@@ -53,7 +53,7 @@ const Navbar = () => {
                 className="border-fortunesly-primary text-fortunesly-primary hover:bg-fortunesly-primary hover:text-white"
                 asChild
               >
-                <Link to={isAdmin ? '/admin' : '/dashboard'}>
+                <Link to={isAdmin ? '/admin/dashboard' : '/dashboard'}>
                   {isAdmin ? 'Admin Panel' : 'Dashboard'}
                 </Link>
               </Button>
@@ -66,13 +66,13 @@ const Navbar = () => {
                 className="text-gray-200 hover:text-white hover:bg-gray-800"
                 asChild
               >
-                <Link to="/login">Login</Link>
+                <Link to="/auth/login">Login</Link>
               </Button>
               <Button
                 className="bg-fortunesly-primary hover:bg-fortunesly-primary/90 text-white"
                 asChild
               >
-                <Link to="/register">Register</Link>
+                <Link to="/auth/register">Register</Link>
               </Button>
             </div>
           )}
@@ -138,7 +138,7 @@ const Navbar = () => {
             {isAuthenticated ? (
               <>
                 <Link
-                  to={isAdmin ? '/admin' : '/dashboard'}
+                  to={isAdmin ? '/admin/dashboard' : '/dashboard'}
                   className="block text-fortunesly-primary hover:text-fortunesly-accent transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -155,7 +155,7 @@ const Navbar = () => {
                   className="text-gray-200 hover:text-white hover:bg-gray-800 justify-start"
                   asChild
                 >
-                  <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
                     Login
                   </Link>
                 </Button>
@@ -163,7 +163,7 @@ const Navbar = () => {
                   className="bg-fortunesly-primary hover:bg-fortunesly-primary/90 text-white"
                   asChild
                 >
-                  <Link to="/register" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/auth/register" onClick={() => setIsMobileMenuOpen(false)}>
                     Register
                   </Link>
                 </Button>
@@ -177,3 +177,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
