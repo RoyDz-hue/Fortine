@@ -6,7 +6,7 @@ const AppLayout: React.FC = () => {
   return (
     <div className="app-layout">
       <Navbar />
-      <main className="app-content">
+      <main className="app-content" style={{ border: '2px solid red', minHeight: '100px' }}>
         <Outlet />
       </main>
     </div>
