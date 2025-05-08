@@ -1,0 +1,38 @@
+
+:root {
+  --fortunesly-primary: #F7931A; /* Bitcoin orange */
+  --fortunesly-secondary: #4d4d4d;
+  --fortunesly-accent: #FBB03B;
+  --fortunesly-dark: #1e293b;
+  --fortunesly-light: #f8fafc;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.text-fortunesly-primary {
+  color: var(--fortunesly-primary);
+}
+
+.text-fortunesly-secondary {
+  color: var(--fortunesly-secondary);
+}
+
+.text-fortunesly-accent {
+  color: var(--fortunesly-accent);
+}
+
+.bg-fortunesly-primary {
+  background-color: var(--fortunesly-primary);
+}
+
+.hover\:bg-fortunesly-primary\/90:hover {
+  background-color: rgba(247, 147, 26, 0.9);
+}
+
+.hover\:text-fortunesly-accent:hover {
+  color: var(--fortunesly-accent);
+}
