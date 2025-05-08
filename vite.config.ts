@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   // Set base to current directory to avoid path issues
-  base: './',
+  base: '/',
   // Ensure environment variables are properly passed
   define: {
     'process.env': process.env
