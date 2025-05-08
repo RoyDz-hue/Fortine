@@ -1,7 +1,7 @@
-
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import ErrorBoundary from "./components/ErrorBoundary"; // Import the ErrorBoundary
 
 // Log environment information
 console.log("Starting application...");
@@ -24,8 +24,12 @@ try {
   const renderTarget = document.getElementById("root");
 
   if (renderTarget) {
-    createRoot(renderTarget).render(<App />);
-    console.log("Application rendered successfully");
+    createRoot(renderTarget).render(
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    );
+    console.log("Application rendered successfully with ErrorBoundary");
   } else {
     console.error("Could not find root element even after attempting to create it");
   }
@@ -40,3 +44,4 @@ try {
   errorDiv.innerHTML = `<h2>Error Starting Application</h2><pre>${error instanceof Error ? error.message : String(error)}</pre>`;
   document.body.appendChild(errorDiv);
 }
+
