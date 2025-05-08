@@ -1,47 +1,36 @@
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import App from "./App.tsx"; // Minimal "Hello World" App
 import "./index.css";
-import ErrorBoundary from "./components/ErrorBoundary"; // Import the ErrorBoundary
 
-// Log environment information
-console.log("Starting application...");
-console.log("Current working directory:", process.cwd?.() || "unknown");
-console.log("Environment:", process.env.NODE_ENV || "unknown");
+console.log("[main.tsx] Script started. Attempting to render minimal App.");
 
 try {
-  // Make sure we have a root element to render to
   const rootElement = document.getElementById("root");
-
-  if (!rootElement) {
-    // Create a root element if it doesn't exist
-    const root = document.createElement("div");
-    root.id = "root";
-    document.body.appendChild(root);
-    console.log("Root element was created because none was found");
-  }
-
-  // Create and render root
-  const renderTarget = document.getElementById("root");
-
-  if (renderTarget) {
-    createRoot(renderTarget).render(
-      <ErrorBoundary>
+  if (rootElement) {
+    console.log("[main.tsx] Root element found. Calling createRoot().render().");
+    createRoot(rootElement).render(
         <App />
-      </ErrorBoundary>
     );
-    console.log("Application rendered successfully with ErrorBoundary");
+    console.log("[main.tsx] createRoot().render() called successfully.");
   } else {
-    console.error("Could not find root element even after attempting to create it");
+    console.error("[main.tsx] CRITICAL: Root element #root not found in DOM.");
+    const newRoot = document.createElement('div');
+    newRoot.id = 'root';
+    document.body.appendChild(newRoot);
+    console.log("[main.tsx] Created and appended #root. This indicates an issue with original index.html or its loading.");
   }
 } catch (error) {
-  console.error("Error rendering application:", error);
-  // Display error visibly on the page for debugging
+  console.error("[main.tsx] CRITICAL: Error during React rendering:", error);
   const errorDiv = document.createElement("div");
+  errorDiv.style.color = "red";
   errorDiv.style.padding = "20px";
-  errorDiv.style.margin = "20px";
-  errorDiv.style.backgroundColor = "#ffeeee";
-  errorDiv.style.border = "1px solid red";
-  errorDiv.innerHTML = `<h2>Error Starting Application</h2><pre>${error instanceof Error ? error.message : String(error)}</pre>`;
-  document.body.appendChild(errorDiv);
+  errorDiv.style.border = "2px solid red";
+  errorDiv.style.backgroundColor = "white";
+  errorDiv.style.position = "fixed";
+  errorDiv.style.top = "10px";
+  errorDiv.style.left = "10px";
+  errorDiv.style.zIndex = "9999";
+  errorDiv.textContent = "Error in main.tsx: " + (error instanceof Error ? error.message : String(error)) + (error instanceof Error && error.stack ? " STACK: " + error.stack : "");
+  document.body.prepend(errorDiv);
 }
 
